@@ -31,22 +31,22 @@ const client = useSupabaseClient()
 const loading = ref(false)
 
 let realtimeChannel: RealtimeChannel
-	const {data: todos, refresh} = await useAsyncData('todos', async () => {
-		if (user.value) {
-			loading.value = true
-			
-			const response = await client.from('todos')
-					.select('id,title, description, user_uid')
-					.order('id', {
-						ascending: false,
-					})
-			
-			loading.value = false
-			
-			return response.data as Array<Todo>
-		}
-		return []
-	})
+const {data: todos, refresh} = await useAsyncData('todos', async () => {
+	if (user.value) {
+		loading.value = true
+		
+		const response = await client.from('todos')
+				.select('id,title, description, user_uid')
+				.order('id', {
+					ascending: false,
+				})
+		
+		loading.value = false
+		
+		return response.data as Array<Todo>
+	}
+	return []
+})
 
 async function remove(row: Todo) {
 	if (window.confirm('Are you sure ?') && row.id) {
@@ -74,18 +74,17 @@ onUnmounted(() => {
 	<UAlert class="my-4" title="This is a realtime database. Open multiple tabs to see it in action !"></UAlert>
 	<UTable :loading="loading" :rows="todos" :columns="columns">
 		<template #title-data="{row}">
-			<UButton variant="link" :to="{name: 'edit',params:{id: row.id}}">{{row.title}}</UButton>
+			<UButton variant="link" :to="{name: 'edit',params:{id: row.id}}">{{ row.title }}</UButton>
 		</template>
 		<template #actions-data="{row}">
 			<div class="text-right">
 				<UButtonGroup>
-				
-				<UButton variant="link" :to="{name: 'edit',params:{id: row.id}}">
-					Edit
-				</UButton>
-				<UButton @click="remove(row)" color="red">
-					Delete
-				</UButton>
+					<UButton variant="link" :to="{name: 'edit',params:{id: row.id}}">
+						Edit
+					</UButton>
+					<UButton @click="remove(row)" color="red">
+						Delete
+					</UButton>
 				</UButtonGroup>
 			</div>
 		</template>
