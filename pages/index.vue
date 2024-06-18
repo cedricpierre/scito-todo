@@ -91,5 +91,5 @@ onUnmounted(() => {
 		</template>
 	</UTable>
 	
-	<UButton :to="{name: 'new'}">Add new note</UButton>
+	<UButton :to="{name: 'create'}">Add new note</UButton>
 </template>

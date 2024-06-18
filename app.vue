@@ -6,7 +6,7 @@ import Edit from "~/pages/todos/[id].vue";
 const router = useRouter()
 
 router.addRoute({ path: '/todos', name: 'index', component: Index })
-router.addRoute({ path: '/todos/create', name: 'new', component: New })
+router.addRoute({ path: '/todos/create', name: 'create', component: New })
 router.addRoute({ path: '/todos/:id', name: 'edit', component: Edit })
 
 </script>
