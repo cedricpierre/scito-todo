@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {RealtimeChannel} from "@supabase/realtime-js";
 import type {Todo} from "~/interfaces/Todo";
 
@@ -73,10 +73,10 @@ onUnmounted(() => {
 
 <template>
 	<div>
-		<UAlert color="primary" class="my-4" title="This is a realtime database. Open multiple tabs to see it in action !"></UAlert>
-		<UTable :loading="loading" :rows="todos" :columns="columns">
+		<UAlert class="my-4" color="primary" title="This is a realtime database. Open multiple tabs to see it in action !"></UAlert>
+		<UTable :columns="columns" :loading="loading" :rows="todos">
 			<template #title-data="{row}">
-				<UButton variant="link" :to="{name: 'todos.edit',params:{id: row.id}}">{{ row.title }}</UButton>
+				<UButton :to="{name: 'todos.edit',params:{id: row.id}}" variant="link">{{ row.title }}</UButton>
 			</template>
 			<template #actions-data="{row}">
 				<div class="text-right">
@@ -84,7 +84,7 @@ onUnmounted(() => {
 						<UButton :to="{name: 'todos.edit',params:{id: row.id}}">
 							Edit
 						</UButton>
-						<UButton @click="remove(row)" color="red">
+						<UButton color="red" @click="remove(row)">
 							Delete
 						</UButton>
 					</UButtonGroup>

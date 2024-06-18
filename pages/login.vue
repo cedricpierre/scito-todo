@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {type InferType, object, string} from 'yup'
 import type {FormSubmitEvent} from "#ui/types";
 
@@ -36,12 +36,12 @@ async function signInWithOtp(event: FormSubmitEvent<Schema>) {
 		<UCard class="w-80 mx-auto">
 			<UForm :schema="schema" :state="credentials" class="space-y-4" @submit="signInWithOtp">
 				<UFormGroup label="Email" name="email" required>
-					<UInput :disabled="loading" v-model="credentials.email"></UInput>
+					<UInput v-model="credentials.email" :disabled="loading"></UInput>
 				</UFormGroup>
 				<UFormGroup label="Password" name="password" required>
-					<UInput :disabled="loading" type="password" v-model="credentials.password"></UInput>
+					<UInput v-model="credentials.password" :disabled="loading" type="password"></UInput>
 				</UFormGroup>
-				<UButton type="submit" class="mt-4">Log in</UButton>
+				<UButton class="mt-4" type="submit">Log in</UButton>
 			</UForm>
 		</UCard>
 	</UContainer>

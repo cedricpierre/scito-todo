@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {type InferType, object, string} from 'yup'
 import type {FormSubmitEvent} from "#ui/types";
 import type {Todo} from "~/interfaces/Todo";
@@ -43,12 +43,12 @@ async function save(event: FormSubmitEvent<Schema>) {
 	<div>
 		<UForm :schema="schema" :state="state" @submit="save">
 			<UFormGroup label="Title" name="title" required>
-				<UInput :disabled="loading" v-model="state.title"/>
+				<UInput v-model="state.title" :disabled="loading"/>
 			</UFormGroup>
 			<UFormGroup label="Description" name="description">
-				<UTextarea :disabled="loading" v-model="state.description"/>
+				<UTextarea v-model="state.description" :disabled="loading"/>
 			</UFormGroup>
-			<UButton type="submit" :disabled="loading" class="mt-4">Save</UButton>
+			<UButton :disabled="loading" class="mt-4" type="submit">Save</UButton>
 		</UForm>
 	</div>
 </template>

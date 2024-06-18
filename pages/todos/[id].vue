@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {type InferType, number, object, string} from 'yup'
 import type {FormSubmitEvent} from "#ui/types";
 import type {Todo} from "~/interfaces/Todo";
@@ -34,7 +34,7 @@ async function load() {
 	loading.value = true
 	const response = await client.from('todos')
 			.select('id,title, description, user_uid')
-			.eq('id',route.params.id)
+			.eq('id', route.params.id)
 			.single()
 	
 	Object.assign(state, response.data)
@@ -64,14 +64,14 @@ onMounted(() => {
 
 <template>
 	<div>
-	<UForm :schema="schema" :state="state" @submit="save">
-		<UFormGroup label="Title" name="title" required>
-			<UInput :disabled="loading" v-model="state.title"/>
-		</UFormGroup>
-		<UFormGroup label="Description" name="description">
-			<UTextarea :disabled="loading" v-model="state.description"/>
-		</UFormGroup>
-		<UButton type="submit" :disabled="loading" class="mt-4">Save</UButton>
-	</UForm>
+		<UForm :schema="schema" :state="state" @submit="save">
+			<UFormGroup label="Title" name="title" required>
+				<UInput v-model="state.title" :disabled="loading"/>
+			</UFormGroup>
+			<UFormGroup label="Description" name="description">
+				<UTextarea v-model="state.description" :disabled="loading"/>
+			</UFormGroup>
+			<UButton :disabled="loading" class="mt-4" type="submit">Save</UButton>
+		</UForm>
 	</div>
 </template>

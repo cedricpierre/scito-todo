@@ -1,3 +1,3 @@
 <script setup>
-navigateTo({name:'todos'})
+navigateTo({name: 'todos'})
 </script>
