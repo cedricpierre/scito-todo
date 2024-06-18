@@ -31,8 +31,6 @@ const client = useSupabaseClient()
 const loading = ref(false)
 
 let realtimeChannel: RealtimeChannel
-
-
 	const {data: todos, refresh} = await useAsyncData('todos', async () => {
 		if (user.value) {
 			loading.value = true
@@ -43,7 +41,6 @@ let realtimeChannel: RealtimeChannel
 						ascending: false,
 					})
 			
-			
 			loading.value = false
 			
 			return response.data as Array<Todo>
@@ -52,7 +49,7 @@ let realtimeChannel: RealtimeChannel
 	})
 
 async function remove(row: Todo) {
-	if (window.confirm('Are you sure ?')) {
+	if (window.confirm('Are you sure ?') && row.id) {
 		await client.from('todos').delete().eq('id', row.id)
 	}
 }
@@ -76,11 +73,20 @@ onUnmounted(() => {
 <template>
 	<UAlert class="my-4" title="This is a realtime database. Open multiple tabs to see it in action !"></UAlert>
 	<UTable :loading="loading" :rows="todos" :columns="columns">
+		<template #title-data="{row}">
+			<router-link :to="{name: 'edit',params:{id: row.id}}">{{row.title}}</router-link>
+		</template>
 		<template #actions-data="{row}">
 			<div class="text-right">
+				<UButtonGroup>
+				
+				<UButton color="primary">
+					<router-link :to="{name: 'edit',params:{id: row.id}}">Edit</router-link>
+				</UButton>
 				<UButton @click="remove(row)" color="red">
 					Delete
 				</UButton>
+				</UButtonGroup>
 			</div>
 		</template>
 	</UTable>

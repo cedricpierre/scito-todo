@@ -4,7 +4,7 @@ import type {FormSubmitEvent} from "#ui/types";
 
 type Schema = InferType<typeof schema>
 
-const supabase = useSupabaseClient()
+const client = useSupabaseClient()
 
 const schema = object({
 	email: string().email().required(),
@@ -22,7 +22,7 @@ async function signInWithOtp(event: FormSubmitEvent<Schema>) {
 	console.log('go')
 	loading.value = true
 	
-	const {error} = await supabase.auth.signInWithPassword(event.data)
+	const {error} = await client.auth.signInWithPassword(event.data)
 	
 	loading.value = false
 	
