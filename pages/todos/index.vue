@@ -52,7 +52,7 @@ async function remove(row: Todo) {
 	if (window.confirm('Are you sure ?') && row.id) {
 		await client.from('todos').delete().eq('id', row.id)
 		
-		todos.value?.splice(todos.value?.indexOf(row),1)
+		todos.value?.splice(todos.value?.indexOf(row), 1)
 	}
 }
 
@@ -72,24 +72,26 @@ onUnmounted(() => {
 </script>
 
 <template>
-	<UAlert class="my-4" title="This is a realtime database. Open multiple tabs to see it in action !"></UAlert>
-	<UTable :loading="loading" :rows="todos" :columns="columns">
-		<template #title-data="{row}">
-			<UButton variant="link" :to="{name: 'edit',params:{id: row.id}}">{{ row.title }}</UButton>
-		</template>
-		<template #actions-data="{row}">
-			<div class="text-right">
-				<UButtonGroup>
-					<UButton variant="link" :to="{name: 'edit',params:{id: row.id}}">
-						Edit
-					</UButton>
-					<UButton @click="remove(row)" color="red">
-						Delete
-					</UButton>
-				</UButtonGroup>
-			</div>
-		</template>
-	</UTable>
-	
-	<UButton :to="{name: 'create'}">Add new note</UButton>
+	<div>
+		<UAlert color="primary" class="my-4" title="This is a realtime database. Open multiple tabs to see it in action !"></UAlert>
+		<UTable :loading="loading" :rows="todos" :columns="columns">
+			<template #title-data="{row}">
+				<UButton variant="link" :to="{name: 'todos.edit',params:{id: row.id}}">{{ row.title }}</UButton>
+			</template>
+			<template #actions-data="{row}">
+				<div class="text-right">
+					<UButtonGroup>
+						<UButton :to="{name: 'todos.edit',params:{id: row.id}}">
+							Edit
+						</UButton>
+						<UButton @click="remove(row)" color="red">
+							Delete
+						</UButton>
+					</UButtonGroup>
+				</div>
+			</template>
+		</UTable>
+		
+		<UButton :to="{name: 'todos.create'}">Add new note</UButton>
+	</div>
 </template>

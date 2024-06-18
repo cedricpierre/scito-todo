@@ -11,8 +11,13 @@ export default defineNuxtConfig({
     },
     app:{
         viewTransition: 'always',
+        pageTransition: { name: 'page', mode: 'out-in' },
     },
-    modules: ["@nuxtjs/supabase", "@nuxt/ui", "@nuxt/icon"],
+    modules: [
+        "@nuxtjs/supabase",
+        "@nuxt/ui",
+        "@nuxt/icon"
+    ],
     tailwindcss: {
         configPath: '@/tailwind.config.ts',
     },

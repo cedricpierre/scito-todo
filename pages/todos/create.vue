@@ -35,18 +35,20 @@ async function save(event: FormSubmitEvent<Schema>) {
 	
 	loading.value = false
 	
-	navigateTo({name: 'index'})
+	navigateTo({name: 'todos.index'})
 }
 </script>
 
 <template>
-	<UForm :schema="schema" :state="state" @submit="save">
-		<UFormGroup label="Title" name="title" required>
-			<UInput :disabled="loading" v-model="state.title"/>
-		</UFormGroup>
-		<UFormGroup label="Description" name="description">
-			<UTextarea :disabled="loading" v-model="state.description"/>
-		</UFormGroup>
-		<UButton type="submit" :disabled="loading" class="mt-4">Save</UButton>
-	</UForm>
+	<div>
+		<UForm :schema="schema" :state="state" @submit="save">
+			<UFormGroup label="Title" name="title" required>
+				<UInput :disabled="loading" v-model="state.title"/>
+			</UFormGroup>
+			<UFormGroup label="Description" name="description">
+				<UTextarea :disabled="loading" v-model="state.description"/>
+			</UFormGroup>
+			<UButton type="submit" :disabled="loading" class="mt-4">Save</UButton>
+		</UForm>
+	</div>
 </template>

@@ -19,7 +19,6 @@ const credentials = reactive({
 const loading = ref(false)
 
 async function signInWithOtp(event: FormSubmitEvent<Schema>) {
-	console.log('go')
 	loading.value = true
 	
 	const {error} = await client.auth.signInWithPassword(event.data)
@@ -27,7 +26,7 @@ async function signInWithOtp(event: FormSubmitEvent<Schema>) {
 	loading.value = false
 	
 	if (!error) {
-		navigateTo({name: 'index'})
+		navigateTo({name: 'todos.index'})
 	}
 }
 </script>

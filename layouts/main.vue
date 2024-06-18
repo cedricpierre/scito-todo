@@ -16,12 +16,12 @@ const colorMode = useColorMode()
 const links = [[
 	{
 		label: 'List notes',
-		to: {name: 'index'}
+		to: {name: 'todos.index'}
 	},
 ], [
 	{
 		label: `Mode`,
-		click: () => colorMode.value = colorMode.value === 'dark' ? 'light' : 'dark',
+		click: () => colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark',
 	},
 	{
 		label: 'Logout',
