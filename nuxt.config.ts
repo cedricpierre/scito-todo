@@ -1,10 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     devtools: {
-        enabled: true,
+        enabled: false,
+    },
+    future: {
+        compatibilityVersion: 4,
     },
     devServer: {
         port: parseInt(process.env.PORT ?? '3000'),
+    },
+    app:{
+        viewTransition: 'always',
     },
     modules: ["@nuxtjs/supabase", "@nuxt/ui", "@nuxt/icon"],
     tailwindcss: {
