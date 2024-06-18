@@ -1,6 +1,12 @@
-# Nuxt 3 Minimal Starter
+# Hello ! 
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This is a quick demonstration of Nuxt with Supabase.
+You will need to install the project using Node v18 minimum. If you don't have it, install `nvm`.
+
+```bash
+nvm install 18
+nvm use 18
+```
 
 ## Setup
 
@@ -22,7 +28,14 @@ bun install
 
 ## Development Server
 
-Start the development server on `http://localhost:3000`:
+Be sure to have the `.env` file configured.
+
+```bash
+cp .env.example .env
+```
+
+
+Start the development server on `http://localhost:3035`:
 
 ```bash
 # npm
@@ -38,38 +51,11 @@ yarn dev
 bun run dev
 ```
 
-## Production
+## Testing
 
-Build the application for production:
+Once launched, you'll be able to connect with these credentials:
 
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+e-mail: demo@scito.com
+password: demodemo
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
