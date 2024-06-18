@@ -57,7 +57,6 @@ async function remove(row: Todo) {
 }
 
 onMounted(() => {
-	// Real time listener for new workouts
 	realtimeChannel = client.channel('public:todos').on(
 			'postgres_changes',
 			{event: '*', schema: 'public', table: 'todos'},
