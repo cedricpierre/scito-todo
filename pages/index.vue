@@ -51,6 +51,8 @@ const {data: todos, refresh} = await useAsyncData('todos', async () => {
 async function remove(row: Todo) {
 	if (window.confirm('Are you sure ?') && row.id) {
 		await client.from('todos').delete().eq('id', row.id)
+		
+		todos.value?.splice(todos.value?.indexOf(row),1)
 	}
 }
 
