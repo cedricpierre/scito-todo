@@ -16,7 +16,7 @@ const colorMode = useColorMode()
 const links = [[
 	{
 		label: 'List notes',
-		to: {name: 'todos.index'}
+		to: {name: 'todos.index'},
 	},
 ], [
 	{
@@ -25,12 +25,12 @@ const links = [[
 	},
 	{
 		label: 'Logout',
-		click: signOut
+		click: signOut,
 	},
 ]]
 </script>
 <template>
-	<UHorizontalNavigation v-if="user" :links="links"></UHorizontalNavigation>
+	<UHorizontalNavigation v-if="user" :links="links" class="bg-amber-500"></UHorizontalNavigation>
 	<UContainer class="py-4">
 		<slot/>
 	</UContainer>
