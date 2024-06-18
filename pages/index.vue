@@ -74,14 +74,14 @@ onUnmounted(() => {
 	<UAlert class="my-4" title="This is a realtime database. Open multiple tabs to see it in action !"></UAlert>
 	<UTable :loading="loading" :rows="todos" :columns="columns">
 		<template #title-data="{row}">
-			<router-link :to="{name: 'edit',params:{id: row.id}}">{{row.title}}</router-link>
+			<UButton variant="link" :to="{name: 'edit',params:{id: row.id}}">{{row.title}}</UButton>
 		</template>
 		<template #actions-data="{row}">
 			<div class="text-right">
 				<UButtonGroup>
 				
-				<UButton color="primary">
-					<router-link :to="{name: 'edit',params:{id: row.id}}">Edit</router-link>
+				<UButton variant="link" :to="{name: 'edit',params:{id: row.id}}">
+					Edit
 				</UButton>
 				<UButton @click="remove(row)" color="red">
 					Delete
