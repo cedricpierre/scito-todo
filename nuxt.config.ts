@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     devServer: {
         port: parseInt(process.env.PORT ?? '3000'),
     },
+    ssr: false,
     app:{
         viewTransition: 'always',
         pageTransition: { name: 'page', mode: 'out-in' },

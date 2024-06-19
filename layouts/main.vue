@@ -30,7 +30,7 @@ const links = [[
 ]]
 </script>
 <template>
-	<UHorizontalNavigation v-if="user" :links="links" class="bg-amber-500"></UHorizontalNavigation>
+	<UHorizontalNavigation v-if="user" :links="links" ></UHorizontalNavigation>
 	<UContainer class="py-4">
 		<slot/>
 	</UContainer>

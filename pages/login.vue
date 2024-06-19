@@ -4,6 +4,10 @@ import type {FormSubmitEvent} from "#ui/types";
 
 type Schema = InferType<typeof schema>
 
+const user = useSupabaseUser()
+
+if(user.value) navigateTo({name: 'todos.index'})
+
 const client = useSupabaseClient()
 
 const schema = object({
