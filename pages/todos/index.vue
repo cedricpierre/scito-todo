@@ -95,31 +95,28 @@ onUnmounted(() => {
 				<UButton :to="{name: 'todos.create'}" color="green">Add new note</UButton>
 			</div>
 		</div>
-		<div class="postit relative w-100 bg-amber-50 overflow-auto rounded-xl" :style="{ height: '600px' }">
+		<div class="relative w-100 bg-amber-50 overflow-auto rounded-xl" :style="{ height: '600px' }">
 			<div
-					v-for="(todo,t) in todos"
-					@click.prevent="selectedIndex = t"
-					:class="{
+				v-for="(todo,t) in todos"
+				@click.prevent="selectedIndex = t"
+				:class="{
 					'selected': selectedIndex === t
 				}"
-					:style="{
-					width: '200px',
-					height: '200px',
-					transform: `rotate(${(((Math.random() * randomized) * 30) - 15)}deg)`,
+				:style="{
+					transform: `translateZ(0px) rotate(${(((Math.random() * randomized) * 30) - 15)}deg)`,
 					left: `${((Math.random() * randomized) * 100)}%`,
 					top: `${((Math.random() * randomized) * 100)}%`,
 					boxShadow: '0 20px 30px rgba(0, 0, 0, 0.2)',
 					transition: 'all 400ms ease',
 				}"
-					class="flex flex-col bg-amber-300 w-1/4 h-1/4 absolute p-4 text-center rounded-md"
+				class="postit flex flex-col bg-amber-300 w-1/4 h-1/4 absolute p-4 text-center rounded-md"
 			>
-				<div class="flex-grow">
-					<h2 class="text-3xl text-amber-950">{{ todo.title }}</h2>
-					<p class="m-4">{{ todo.description }}</p>
+				<h2 class="text-2xl text-amber-950">{{ todo.title }}</h2>
+				<div class="flex-grow overflow-auto">
+					<p class="m-4 ">{{ todo.description }}</p>
 				</div>
 				<div class="flex-shrink">
 					<div class="flex gap-2 justify-center align-middle">
-						
 						<UButton variant="link" color="black" :to="{name: 'todos.edit',params:{id: todo.id}}">Edit</UButton>
 						<UButton color="red" @click="remove(todo)">Remove</UButton>
 					</div>
@@ -131,11 +128,20 @@ onUnmounted(() => {
 </template>
 
 <style>
+.postit {
+	width: 200px;
+	height: 200px;
+	z-index: 1;
+}
+.postit:hover {
+	z-index: 2;
+	cursor: pointer;
+}
+
 .selected {
-	transform: rotate(0deg) !important;
+	transform: rotate(0deg) scale(1.2) !important;
 	left: calc(50% - 100px) !important;
 	top: calc(50% - 100px) !important;
 	z-index: 2;
-	zoom: 1.2;
 }
 </style>
