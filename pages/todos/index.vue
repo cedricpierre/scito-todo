@@ -36,9 +36,12 @@ randomize()
 
 async function remove(todo: Todo) {
 	if (window.confirm('Are you sure ?') && todo.id) {
+		console.log(todos)
 		await client.from('todos').delete().eq('id', todo.id)
+		if(todos.value){
+			todos.value.splice(todos.value.indexOf(todo), 1)
+		}
 		
-		todos.splice(todos.indexOf(todo), 1)
 	}
 }
 
