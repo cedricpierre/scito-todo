@@ -130,6 +130,6 @@ onUnmounted(() => {
 	transform: rotate(0deg) scale(1.8) !important;
 	left: calc(50% - 100px) !important;
 	top: calc(50% - 100px) !important;
-	z-index: 200;
+	z-index: 200 !important;
 }
 </style>
