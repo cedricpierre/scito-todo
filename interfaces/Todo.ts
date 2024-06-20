@@ -3,6 +3,7 @@ export interface Todo {
     title: string,
     description?: string,
     user_uid: string,
+    is_done: boolean,
 }
 
 export interface User {

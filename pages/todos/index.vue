@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import {RealtimeChannel} from "@supabase/realtime-js";
 import type {Todo} from "~/interfaces/Todo";
+import PostIt from "~/components/PostIt.vue";
 
 const user = useSupabaseUser()
+const client = useSupabaseClient()
 
 const randomized = ref(0)
 
@@ -32,8 +34,6 @@ const columns = [
 	}
 ];
 
-const client = useSupabaseClient()
-
 const loading = ref(false)
 
 let realtimeChannel: RealtimeChannel
@@ -42,7 +42,7 @@ const {data: todos, refresh} = await useAsyncData('todos', async () => {
 		loading.value = true
 		
 		const response = await client.from('todos')
-				.select('id,title, description, user_uid')
+				.select('*')
 				.order('id', {
 					ascending: false,
 				})
@@ -56,12 +56,16 @@ const {data: todos, refresh} = await useAsyncData('todos', async () => {
 
 randomize()
 
-async function remove(row: Todo) {
-	if (window.confirm('Are you sure ?') && row.id) {
-		await client.from('todos').delete().eq('id', row.id)
+async function remove(todo: Todo) {
+	if (window.confirm('Are you sure ?') && todo.id) {
+		await client.from('todos').delete().eq('id', todo.id)
 		
-		todos.value?.splice(todos.value?.indexOf(row), 1)
+		props.todos?.splice(props.todos?.indexOf(todo), 1)
 	}
+}
+
+async function mark(todo: Todo) {
+	await client.from('todos').update({is_done:!todo.is_done}).eq('id', todo.id)
 }
 
 function randomize() {
@@ -96,9 +100,12 @@ onUnmounted(() => {
 			</div>
 		</div>
 		<div class="relative w-100 bg-amber-50 overflow-auto rounded-xl" :style="{ height: '600px' }">
-			<div
+			<PostIt
 				v-for="(todo,t) in todos"
-				@click.prevent="selectedIndex = t"
+				:todo="todo"
+				:todos="todos"
+				:index="t"
+				@click.stop.prevent="selectedIndex = t"
 				:class="{
 					'selected': selectedIndex === t
 				}"
@@ -109,20 +116,10 @@ onUnmounted(() => {
 					boxShadow: '0 20px 30px rgba(0, 0, 0, 0.2)',
 					transition: 'all 400ms ease',
 				}"
-				class="postit flex flex-col bg-amber-300 w-1/4 h-1/4 absolute p-4 text-center rounded-md"
+				@remove="remove"
+				@mark="mark"
 			>
-				<h2 class="text-2xl text-amber-950">{{ todo.title }}</h2>
-				<div class="flex-grow overflow-auto">
-					<p class="m-4 ">{{ todo.description }}</p>
-				</div>
-				<div class="flex-shrink">
-					<div class="flex gap-2 justify-center align-middle">
-						<UButton variant="link" color="black" :to="{name: 'todos.edit',params:{id: todo.id}}">Edit</UButton>
-						<UButton color="red" @click="remove(todo)">Remove</UButton>
-					</div>
-				</div>
-			
-			</div>
+			</PostIt>
 		</div>
 	</div>
 </template>

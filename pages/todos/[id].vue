@@ -27,13 +27,14 @@ const state = reactive({
 	title: '',
 	description: '',
 	user_uid: '',
+	is_done: false,
 } as Todo)
 
 
 async function load() {
 	loading.value = true
 	const response = await client.from('todos')
-			.select('id,title, description, user_uid')
+			.select('*')
 			.eq('id', route.params.id)
 			.single()
 	
@@ -71,6 +72,10 @@ onMounted(() => {
 			<UFormGroup label="Description" name="description">
 				<UTextarea v-model="state.description" :disabled="loading"/>
 			</UFormGroup>
+			<UFormGroup label="Done" name="is_done">
+				<UCheckbox v-model="state.is_done" :disabled="loading">Done</UCheckbox>
+			</UFormGroup>
+			
 			<UButton :disabled="loading" class="mt-4" type="submit">Save</UButton>
 		</UForm>
 	</div>

@@ -20,6 +20,7 @@ const state = reactive({
 	id: undefined,
 	title: '',
 	description: '',
+	is_done: false,
 } as Todo)
 
 const loading = ref(false)
@@ -47,6 +48,9 @@ async function save(event: FormSubmitEvent<Schema>) {
 			</UFormGroup>
 			<UFormGroup label="Description" name="description">
 				<UTextarea v-model="state.description" :disabled="loading"/>
+			</UFormGroup>
+			<UFormGroup label="Done" name="is_done">
+				<UCheckbox v-model="state.is_done" :disabled="loading">Done</UCheckbox>
 			</UFormGroup>
 			<UButton :disabled="loading" class="mt-4" type="submit">Save</UButton>
 		</UForm>
