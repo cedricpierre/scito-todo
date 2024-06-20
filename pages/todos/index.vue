@@ -12,28 +12,6 @@ const selectedIndex = ref()
 
 randomized.value = Math.random()
 
-const columns = [
-	{
-		key: 'id',
-		label: 'Id',
-		class: 'w-1'
-	},
-	{
-		key: 'title',
-		label: 'Title',
-	},
-	{
-		key: 'description',
-		label: 'Description',
-	},
-	{
-		key: 'actions',
-		label: 'Actions',
-		class: 'text-right'
-		
-	}
-];
-
 const loading = ref(false)
 
 let realtimeChannel: RealtimeChannel
@@ -49,7 +27,7 @@ const {data: todos, refresh} = await useAsyncData('todos', async () => {
 		
 		loading.value = false
 		
-		return response.data as Array<Todo>
+		return response.data ?? [] as Array<Todo>
 	}
 	return []
 })
@@ -60,7 +38,7 @@ async function remove(todo: Todo) {
 	if (window.confirm('Are you sure ?') && todo.id) {
 		await client.from('todos').delete().eq('id', todo.id)
 		
-		props.todos?.splice(props.todos?.indexOf(todo), 1)
+		todos.splice(todos.indexOf(todo), 1)
 	}
 }
 
@@ -111,7 +89,7 @@ onUnmounted(() => {
 				}"
 				:style="{
 					transform: `translateZ(0px) rotate(${(((Math.random() * randomized) * 30) - 15)}deg)`,
-					zIndex: `${Math.ceil(Math.random() * todos.length)}`,
+					zIndex: `${Math.ceil(Math.random() * todos?.length)}`,
 					left: `${((Math.random() * randomized) * 100)}%`,
 					top: `${((Math.random() * randomized) * 100)}%`,
 					boxShadow: '0 20px 30px rgba(0, 0, 0, 0.2)',
