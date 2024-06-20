@@ -125,16 +125,6 @@ onUnmounted(() => {
 </template>
 
 <style>
-.postit {
-	width: 200px;
-	height: 200px;
-	z-index: 1;
-}
-.postit:hover {
-	z-index: 2;
-	cursor: pointer;
-}
-
 .selected {
 	transform: rotate(0deg) scale(1.8) !important;
 	left: calc(50% - 100px) !important;

@@ -49,3 +49,16 @@ const emits = defineEmits(['remove','mark'])
 		</div>
 	</div>
 </template>
+
+<style>
+.postit {
+	width: 200px;
+	height: 200px;
+	z-index: 1;
+}
+.postit:hover {
+	z-index: 2;
+	cursor: pointer;
+}
+
+</style>
