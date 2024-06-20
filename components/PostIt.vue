@@ -54,10 +54,9 @@ const emits = defineEmits(['remove','mark'])
 .postit {
 	width: 200px;
 	height: 200px;
-	z-index: 1;
 }
 .postit:hover {
-	z-index: 2;
+	z-index: 100 !important;
 	cursor: pointer;
 }
 

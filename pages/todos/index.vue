@@ -111,6 +111,7 @@ onUnmounted(() => {
 				}"
 				:style="{
 					transform: `translateZ(0px) rotate(${(((Math.random() * randomized) * 30) - 15)}deg)`,
+					zIndex: `${Math.ceil(Math.random() * todos.length)}`,
 					left: `${((Math.random() * randomized) * 100)}%`,
 					top: `${((Math.random() * randomized) * 100)}%`,
 					boxShadow: '0 20px 30px rgba(0, 0, 0, 0.2)',
